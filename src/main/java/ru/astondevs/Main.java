@@ -2,6 +2,11 @@ package ru.astondevs;
 
 import ru.astondevs.arraylist.ArrayList;
 
+import java.util.Arrays;
+
+import static ru.astondevs.sort.QuickSort.quickSort;
+import static ru.astondevs.sort.QuickSort.sort;
+
 public class Main {
     public static void main(String[] args) {
         ArrayList<Integer> integerList = new ArrayList<>();
@@ -21,6 +26,9 @@ public class Main {
         integerList.replace(1,1);
         System.out.println(integerList);
         //integerList.clear();
-        System.out.println(integerList.sort());
+        //System.out.println(quickSort(integerList), 0, 10);
+        integerList.replace(10,1);
+        System.out.println(integerList);
+        System.out.println(Arrays.toString(sort(integerList)));
     }
 }

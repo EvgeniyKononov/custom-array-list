@@ -1,8 +1,11 @@
 package ru.astondevs.arraylist;
 
 import ru.astondevs.exception.OutOfIndexCustomException;
+import ru.astondevs.sort.QuickSort;
 
 import java.util.Arrays;
+
+import static ru.astondevs.sort.QuickSort.quickSort;
 
 public class ArrayList<T> {
     private static final int DEFAULT_CAPACITY = 10;
@@ -53,13 +56,7 @@ public class ArrayList<T> {
         lastIndexElement = -1;
     }
 
-    public T[] sort() {
-        T[] elementsOfArray = fillArray();
-        array = quickSort(elementsOfArray, 0, elementsOfArray.length - 1);
-        return (T[]) array;
-    }
-
-    private T[] fillArray() {
+    public T[] getAll(){
         Object[] elementsOfArray = new Object[lastIndexElement + 1];
         for (int i = 0; i <= lastIndexElement; i++) {
             elementsOfArray[i] = array[i];
@@ -67,13 +64,33 @@ public class ArrayList<T> {
         return (T[]) elementsOfArray;
     }
 
-    private T[] quickSort(T[] sortArr, int low, int high) {
+    public int size(){
+        return lastIndexElement + 1;
+    }
+
+
+   /*
+    public T[] sort() {
+       // T[] elementsOfArray = fillArray();
+       // array = quickSort(elementsOfArray, 0, elementsOfArray.length - 1);
+        return QuickSort.sort(getAll());
+    }
+/*
+    private T[] fillArray() {
+        Object[] elementsOfArray = new Object[lastIndexElement + 1];
+        for (int i = 0; i <= lastIndexElement; i++) {
+            elementsOfArray[i] = array[i];
+        }
+        return (T[]) elementsOfArray;
+    }
+/*
+    private <T extends Comparable<T>> T[] quickSort(T[] sortArr, int low, int high) {
         //завершить,если массив пуст или уже нечего делить
         if (sortArr.length == 0 || low >= high) return sortArr;
 
         //выбираем опорный элемент
         int middle = low + (high - low) / 2;
-        T border = sortArr[middle];
+        T border = (T) sortArr[middle];
 
         //разделияем на подмассивы и меняем местами
         int i = low, j = high;
@@ -83,7 +100,7 @@ public class ArrayList<T> {
             // while (sortArr[j] > border) j--;
             while (sortArr[j].compareTo(border) > 0) j--;
             if (i <= j) {
-                T swap = sortArr[i];
+                T swap = (T) sortArr[i];
                 sortArr[i] = sortArr[j];
                 sortArr[j] = swap;
                 i++;
@@ -96,7 +113,7 @@ public class ArrayList<T> {
         if (high > i) quickSort(sortArr, i, high);
         return sortArr;
     }
-
+*/
     private void checkIndex(int index) {
         if (index > lastIndexElement) {
             throw new OutOfIndexCustomException("Provided index is more than last element in the list. " +
