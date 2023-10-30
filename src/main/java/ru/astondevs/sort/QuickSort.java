@@ -1,54 +1,46 @@
 package ru.astondevs.sort;
 
-import ru.astondevs.arraylist.ArrayList;
+/**
+ * The utility class for making sorting using Quick Sort algorithm.
+ */
 
-import java.awt.*;
-import java.lang.reflect.Array;
-import java.util.ListIterator;
-
-public class QuickSort<T> {
-
-    public static <T extends Comparable<T>> T[] sort(ArrayList<T> list) {
-        int size = list.size();
-        // T[] array = (T[]) Array.newInstance(list.getClass().getComponentType(), size);
-     /*   T[] source = list.getAll();
-        T[] array = (T[]) new Comparable[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = source[i];
-        }*/
-        Object[] source = list.getAll();
-        T[] array = (T[]) new Comparable[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = (T) source[i];
-
+public class QuickSort {
+    /**
+     * The static method for sorting elements by Quick Sort algorithm.
+     *
+     * @param array The array which need to sort.
+     * @param left  Index of first element of array.
+     * @param right Index of last element of array.
+     * @param <T>   Elements of array which extends Comparable type.
+     * @return The array of sorted elements.
+     */
+    public static <T extends Comparable<T>> T[] quickSort(T[] array, int left, int right) {
+        if (left < right) {
+            int pivot = partition(array, left, right);
+            quickSort(array, left, pivot - 1);
+            quickSort(array, pivot, right);
         }
-        return quickSort(array, 0, size-1);
+        return array;
     }
 
-    public static <T extends Comparable<T>> T[] quickSort(T[] sortArr, int low, int high) {
-        //завершить,если массив пуст или уже нечего делить
-        if (sortArr.length == 0 || low >= high) return sortArr;
-
-        //выбираем опорный элемент
-        int middle = low + (high - low) / 2;
-        T border = sortArr[middle];
-
-        //разделияем на подмассивы и меняем местами
-        int i = low, j = high;
-        while (i <= j) {
-            // while (sortArr[i] < border) i++;
-            while (sortArr[i].compareTo(border) < 0) i++;
-            // while (sortArr[j] > border) j--;
-            while (sortArr[j].compareTo(border) > 0) j--;
-            if (i <= j) {
-                T swap = sortArr[i];
-                sortArr[i] = sortArr[j];
-                sortArr[j] = swap;
-                i++;
-                j--;
+    private static <T extends Comparable<T>> int partition(T[] array, int left, int right) {
+        int mid = (left + right) / 2;
+        T pivot = array[mid];
+        while (right >= left) {
+            while (array[left].compareTo(pivot) < 0) {
+                left++;
+            }
+            while (pivot.compareTo(array[right]) < 0) {
+                right--;
+            }
+            if (right >= left) {
+                T swap = array[left];
+                array[left] = array[right];
+                array[right] = swap;
+                ++left;
+                --right;
             }
         }
-        return sortArr;
+        return left;
     }
-
 }
