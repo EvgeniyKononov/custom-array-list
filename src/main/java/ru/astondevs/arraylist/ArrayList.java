@@ -3,6 +3,7 @@ package ru.astondevs.arraylist;
 import ru.astondevs.exception.OutOfIndexCustomException;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 import static ru.astondevs.sort.QuickSort.quickSort;
 
@@ -116,13 +117,25 @@ public class ArrayList<T> {
     }
 
     /**
-     * Method for sorting of elements ArrayList.
-     * To make sorting possible the elements of ArrayList must be the Comparable type.
+     * Method for sorting of elements ArrayList of Comparable type.
      *
      * @return ArrayList with sorted elements.
      */
     public ArrayList<T> sort() {
         Comparable[] sortedArray = getSortedArray();
+        for (int i = 0; i < sortedArray.length; i++) {
+            array[i] = sortedArray[i];
+        }
+        return this;
+    }
+
+    /**
+     * Method for sorting of ArrayList elements using Comparator.
+     *
+     * @return ArrayList with sorted elements.
+     */
+    public ArrayList<T> sort(Comparator<T> c) {
+        T[] sortedArray = quickSort((T[])array, 0, this.size() - 1, c);
         for (int i = 0; i < sortedArray.length; i++) {
             array[i] = sortedArray[i];
         }

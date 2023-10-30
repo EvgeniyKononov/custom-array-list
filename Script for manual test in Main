@@ -16,6 +16,6 @@
         System.out.println(integerList);
         integerList.replace(10, 1);
         System.out.println(integerList);
-        System.out.println(integerList.sort());
+        //System.out.println(integerList.sort());
         System.out.println(integerList);
         integerList.clear();

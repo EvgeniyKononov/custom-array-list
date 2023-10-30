@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.astondevs.exception.OutOfIndexCustomException;
 
+import java.util.Comparator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArrayListTest {
@@ -123,7 +125,7 @@ class ArrayListTest {
     }
 
     @Test
-    void sort_whenSortList_thenReturnListWithSortedElements() {
+    void sort_whenSortComparableList_thenReturnListWithSortedElements() {
         list.clear();
         ArrayList<Integer> expected = new ArrayList<>();
         for(int i = 0, j = 99; i < 100; i++, j--) {
@@ -131,5 +133,16 @@ class ArrayListTest {
             expected.add(i);
         }
         assertEquals(expected, list.sort());
+    }
+
+    @Test
+    void sort_whenSortListWithComparator_thenReturnListWithSortedElements() {
+        list.clear();
+        ArrayList<Integer> expected = new ArrayList<>();
+        for(int i = 0, j = 99; i < 100; i++, j--) {
+            list.add(j);
+            expected.add(i);
+        }
+        assertEquals(expected, list.sort(Comparator.naturalOrder()));
     }
 }
