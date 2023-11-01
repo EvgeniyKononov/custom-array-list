@@ -19,3 +19,8 @@
         //System.out.println(integerList.sort());
         System.out.println(integerList);
         integerList.clear();
+        ArrayList<Object> objectList = new ArrayList<>();
+        for (int i = 0; i < 10000; i++) {
+            objectList.add(new Object(), 0);
+        }
+        System.out.println(objectList);

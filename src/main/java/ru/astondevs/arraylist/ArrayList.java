@@ -37,7 +37,9 @@ public class ArrayList<T> {
      */
     public void add(T e, int index) {
         checkCapacity();
-        checkIndex(index);
+        if (index != 0) {
+            checkIndex(index);
+        }
         lastIndexElement++;
         Object temp;
         for (int i = index; i <= lastIndexElement; i++) {
@@ -135,7 +137,7 @@ public class ArrayList<T> {
      * @return ArrayList with sorted elements.
      */
     public ArrayList<T> sort(Comparator<T> c) {
-        T[] sortedArray = quickSort((T[])array, 0, this.size() - 1, c);
+        T[] sortedArray = quickSort((T[]) array, 0, this.size() - 1, c);
         for (int i = 0; i < sortedArray.length; i++) {
             array[i] = sortedArray[i];
         }
